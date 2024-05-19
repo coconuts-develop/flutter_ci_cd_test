@@ -80,7 +80,7 @@ jobs:
 
       - name: Run flutter build
         id: build
-        run: flutter build ipa --release
+        run: flutter build ipa --release --no-codesign
 
       # - name: Upload to App Store Connect
       #   run: >
