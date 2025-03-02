@@ -20,7 +20,7 @@ jobs:
         uses: actions/create-github-app-token@v1
         with:
           app-id: ${{ secrets.CREATE_APP_TOKEN_APP_ID }}
-          private-key: ${{ secrets.CREATE_APP_TOKEN_APP_ID }}
+          private-key: ${{ secrets.CREATE_APP_TOKEN_PRIVATE_KEY }}
 
       - name: Create release branch
         env:
