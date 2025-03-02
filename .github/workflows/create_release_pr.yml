@@ -1,0 +1,45 @@
+name: Create Release Pull Request
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version'
+        required: false
+        type: string
+        default: '0.0.0'
+
+jobs:
+  create_release_pr:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Release version - ${{ github.event.inputs.version }}"
+
+      - name: Generate GitHub App token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.CREATE_APP_TOKEN_APP_ID }}
+          private-key: ${{ secrets.CREATE_APP_TOKEN_APP_ID }}
+
+      - name: Create release branch
+        env:
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+          branch_name: "release/version_${{ github.event.inputs.version }}"
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b ${{ env.branch_name }}
+          git push -f origin ${{ env.branch_name }}
+
+      - name: Create release PR
+        env:
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+          title: "Release version: ${{ github.event.inputs.version }}"
+          body: "This pull request was generated automatically by GitHub Actions."
+        run:
+          gh pr create \
+          --base "master" \
+          --label "release" \
+          --title "${{ env.title }}" \
+          --body "${{ env.body }}" \
