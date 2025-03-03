@@ -22,6 +22,9 @@ jobs:
           app-id: ${{ secrets.CREATE_APP_TOKEN_APP_ID }}
           private-key: ${{ secrets.CREATE_APP_TOKEN_PRIVATE_KEY }}
 
+      - name: Check out
+        uses: actions/checkout@v4
+
       - name: Create release branch
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
