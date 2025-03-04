@@ -40,9 +40,9 @@ jobs:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
           title: "Release version: ${{ github.event.inputs.version }}"
           body: "This pull request was generated automatically by GitHub Actions."
-        run:
+        run: |
           gh pr create \
           --base "master" \
           --label "release" \
           --title "${{ env.title }}" \
-          --body "${{ env.body }}" \
+          --body "${{ env.body }}"
