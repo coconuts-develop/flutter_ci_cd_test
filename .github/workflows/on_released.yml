@@ -1,4 +1,4 @@
-name: Create back port from master to dev
+name: Create backport from master to dev
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  create-back-port:
+  create-backport:
     runs-on: ubuntu-latest
     steps:
       - name: Generate GitHub App token
