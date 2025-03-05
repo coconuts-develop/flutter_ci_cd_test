@@ -1,0 +1,9 @@
+name: Deploy to Play Store internal
+description: Deploy to Play Store internal
+
+runs:
+  using: composite
+  steps:
+    - name: Upload to Play Store Console
+      shell: bash
+      run: echo "Deployed internal on Play Store"

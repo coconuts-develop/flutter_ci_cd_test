@@ -1,0 +1,30 @@
+name: Create back port from master to dev
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  create-back-port:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate GitHub App token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.CREATE_APP_TOKEN_APP_ID }}
+          private-key: ${{ secrets.CREATE_APP_TOKEN_PRIVATE_KEY }}
+
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Create backport PR
+        env:
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+          title: "Backport to dev"
+          body: "This pull request was generated automatically by GitHub Actions."
+        run: |
+          gh pr create \
+          --base "dev" \
+          --title "${{ env.title }}" \
+          --body "${{ env.body }}"
