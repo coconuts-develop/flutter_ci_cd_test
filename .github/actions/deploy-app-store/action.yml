@@ -1,0 +1,9 @@
+name: Deploy to App Store
+description: Deploy to App Store
+
+runs:
+  using: composite
+  steps:
+    - name: Upload to App Store
+      shell: bash
+      run: echo "Deployed App Store"

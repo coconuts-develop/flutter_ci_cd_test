@@ -1,0 +1,27 @@
+# Runs when created "release -> master" pull request
+# by "create_release_pr.yml"
+name: Release
+
+on:
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+    branches: [ master ]
+
+jobs:
+  deploy-play-store-internal:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy Play Store Internal
+        uses: ./.github/actions/deploy-play-store-internal
+
+  deploy-app-store:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy App Store
+        uses: ./.github/actions/deploy-app-store
