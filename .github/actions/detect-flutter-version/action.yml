@@ -1,0 +1,15 @@
+name: Detect flutter version
+description: Detect flutter version
+
+outputs:
+  version:
+    description: flutter_version
+    value: ${{ steps.detect-flutter-version.outputs.version }}
+
+runs:
+  using: composite
+  steps:
+    - name: Detect flutter version
+      id: detect-flutter-version
+      shell: bash
+      run: echo version=$(jq -r '.flutter' ./.fvmrc) >> $GITHUB_OUTPUT
