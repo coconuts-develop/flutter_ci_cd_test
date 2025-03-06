@@ -9,7 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+      - name: Generate GitHub App token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.CREATE_APP_TOKEN_APP_ID }}
+          private-key: ${{ secrets.CREATE_APP_TOKEN_PRIVATE_KEY }}
+
       - name: Checkout
+        env:
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
         uses: actions/checkout@v4
 
       - name: Detect flutter version
