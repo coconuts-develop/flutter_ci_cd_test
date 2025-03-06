@@ -14,7 +14,7 @@ runs:
       shell: bash
       run: |
         DETECT_VERSION=$(jq -r '.flutter' ./.fvmrc)
-        echo ${DETECT_VERSION}
+        echo Detect version: ${DETECT_VERSION}
         if [ "${DETECT_VERSION}" != "null" ]; then
           echo version=${DETECT_VERSION} >> $GITHUB_OUTPUT
         else
