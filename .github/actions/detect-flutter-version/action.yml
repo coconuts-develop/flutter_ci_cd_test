@@ -15,7 +15,7 @@ runs:
       run: |
         DETECT_VERSION=$(jq -r '.flutter' ./.fvmrc)
         echo ${DETECT_VERSION}
-        if [ "${DETECT_VERSION}" = "" ]; then
+        if [ "${DETECT_VERSION}" != "null" ]; then
           echo version= >> $GITHUB_OUTPUT
         else
           echo "Can't detect flutter version."
