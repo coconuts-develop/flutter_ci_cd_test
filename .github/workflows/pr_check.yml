@@ -18,6 +18,8 @@ jobs:
           owner: ${{ github.repository_owner }}
 
       - name: Checkout
+        env:
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
         uses: actions/checkout@v4
         with:
           token: ${{ steps.generate_token.outputs.token }}
