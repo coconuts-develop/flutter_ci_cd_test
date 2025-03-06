@@ -15,6 +15,7 @@ jobs:
         with:
           app-id: ${{ secrets.CREATE_APP_TOKEN_APP_ID }}
           private-key: ${{ secrets.CREATE_APP_TOKEN_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
 
       - name: Checkout
         uses: actions/checkout@v4
