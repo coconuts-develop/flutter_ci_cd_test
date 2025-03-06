@@ -18,6 +18,8 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ steps.generate_token.outputs.token }}
 
       - name: Detect flutter version
         id: flutter-version
