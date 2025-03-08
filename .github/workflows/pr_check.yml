@@ -15,7 +15,6 @@ jobs:
         with:
           app-id: ${{ secrets.CREATE_APP_TOKEN_APP_ID }}
           private-key: ${{ secrets.CREATE_APP_TOKEN_PRIVATE_KEY }}
-          owner: ${{ github.repository_owner }}
 
       - name: Configure Git authentication
         run: git config --global url."https://x-access-token:${{ steps.generate_token.outputs.token }}@github.com/".insteadOf "https://github.com/"
@@ -37,8 +36,6 @@ jobs:
         run: flutter --version
 
       - name: Install dependencies
-        env:
-          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
         run: flutter pub get
 
       - name: Linter
