@@ -17,12 +17,11 @@ jobs:
           private-key: ${{ secrets.CREATE_APP_TOKEN_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
 
+      - name: Configure Git authentication
+        run: git config --global url."https://${{ steps.generate_token.outputs.token }}@github.com/".insteadOf "https://github.com/"
+
       - name: Checkout
-        env:
-          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
         uses: actions/checkout@v4
-        with:
-          token: ${{ steps.generate_token.outputs.token }}
 
       - name: Detect flutter version
         id: flutter-version
