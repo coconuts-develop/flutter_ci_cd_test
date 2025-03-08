@@ -18,7 +18,7 @@ jobs:
           owner: ${{ github.repository_owner }}
 
       - name: Configure Git authentication
-        run: git config --global url."https://${{ steps.generate_token.outputs.token }}@github.com/".insteadOf "https://github.com/"
+        run: git config --global url."https://x-access-token:${{ steps.generate_token.outputs.token }}@github.com/".insteadOf "https://github.com/"
 
       - name: Checkout
         uses: actions/checkout@v4
