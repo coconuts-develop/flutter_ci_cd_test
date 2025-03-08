@@ -16,9 +16,10 @@ jobs:
           app-id: ${{ secrets.CREATE_APP_TOKEN_APP_ID }}
           private-key: ${{ secrets.CREATE_APP_TOKEN_PRIVATE_KEY }}
 
+      - name: Configure Git authentication
+        run: git config --global url."https://x-access-token:${{ steps.generate_token.outputs.token }}@github.com/".insteadOf "https://github.com/"
+
       - name: Checkout
-        env:
-          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
         uses: actions/checkout@v4
 
       - name: Detect flutter version
